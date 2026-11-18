@@ -7,7 +7,7 @@ from tkinter import messagebox, ttk
 import tkinter as tk
 
 
-DEEPSEEK_API_KEY = '#'
+DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY", "")
 
 
 def translate_text_deepseek(text, dest_lang='en'):

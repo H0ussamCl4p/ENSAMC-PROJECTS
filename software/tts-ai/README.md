@@ -1,30 +1,24 @@
-# TTS-AI by CHOUBIK Houssam 🎙️🤖
+# TTS-AI
 
-TTS-AI is a text-to-speech and speech-to-text application with additional features like Braille-to-speech conversion and text translation. The application uses `customtkinter` for a modern UI and various speech processing and translation APIs.
+Desktop app that turns text into speech and speech into text. It also reads Braille input aloud and translates text between languages.
 
-## Features ✨
+Modes:
 
-- **Text-to-Speech** 📜➡️🗣️: Converts written text to speech in various languages.
-- **Braille-to-Speech** 🔠➡️🗣️: Converts Braille text input into speech.
-- **Text Translation** 🌍🔤: Translates input text into another language using DeepSeek's translation API.
-- **Speech-to-Text** 🗣️➡️📝: Converts spoken words into text.
-- **Speech-to-Text with Translation to Speech** 🗣️➡️📝➡️🗣️🌍: Converts speech to text and then translates it to speech in the selected language.
+1. Text to speech
+2. Braille to speech
+3. Translate text
+4. Translate text, then speak it
+5. Speech to text
+6. Speech to text, translate, then speak it
 
-## Requirements ⚙️
+Speech uses Google Text-to-Speech and the `speech_recognition` library. Translation calls the DeepSeek API.
 
-Before running the application, ensure you have the following Python libraries installed.
-
-
-**Step 1** : Downloading libraries
-
-Run the following command :
+## Run it
 
 ```bash
 pip install -r requirements.txt
-```
-
-**Step 2** : Run your program
-
-```bash
+export DEEPSEEK_API_KEY=your-key   # only needed for translation
 python TTS-AI.py
 ```
+
+On Windows PowerShell, set the key with `$env:DEEPSEEK_API_KEY = "your-key"`.

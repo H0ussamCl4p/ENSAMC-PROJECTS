@@ -1,33 +1,33 @@
-# ENSAMC-PROJECTS
+# ENSAMC Projects
 
-A repository dedicated to ENSAMC projects, showcasing innovative solutions and ideas.
+Projects I built as a student at ENSAM Casablanca, from first-year electronics to club websites.
 
-## 🚀 Projects
+## Electronics
 
-### **Project 1**: RGB LED Strip 12V Controller  
-A customizable and efficient controller for RGB LED strips, designed to enhance lighting control with ease and precision.  
+| Project | What it does | Hardware |
+|---|---|---|
+| [RGB LED controller](electronics/rgb-led-controller) | Control a 12V RGB LED strip from a web page served by an ESP32 | ESP32, TIP120 transistors |
+| [Irrigation system](electronics/irrigation-system) | Waters a plant when the soil gets dry | Arduino Uno, soil sensor, relay, pump |
 
-#### 🛠️ Materials
+## Software
 
-- **Microcontroller**: ESP32  
-- **Programming Language**: C++  
-- **Development Environment**: Arduino IDE  
-- 3 NPN Transistors TIP 120  
-- RGB LED Strip (12V)  
-- Battery (9V)  
-- Resistors (10k Ohm x 3)  
-- Jumper Wires  
-- Breadboard  
-- Green PCB Printed Circuit  
+| Project | What it does | Stack |
+|---|---|---|
+| [TTS-AI](software/tts-ai) | Text-to-speech, speech-to-text, Braille-to-speech and translation in one desktop app | Python, customtkinter, gTTS |
+| [Graph app](software/graph-app) | Plot X/Y data with a linear regression line and save it as PNG | Python, Tkinter, matplotlib |
+| [Birthday script](software/birthday-script) | Blinking "Happy Birthday" banner in the terminal | Python, pyfiglet |
 
-[🔗 See the project details](https://github.com/HoussamCbk/ENSAMC-PROJECTS/tree/main/RGB%20LED%20STRIP%2012V%20Controller)
+## Websites
 
-### **Project 2**: Graph App  
-A python app for graph and plotting.  
+| Project | What it is |
+|---|---|
+| [Nova](web/nova) | Link page for the Nova student list |
+| [Arts & Crafts Aeronautics](web/aeronautics-club) | Link page for the ENSAM Casablanca aeronautics club |
 
-[🔗 See the project details](https://github.com/HoussamCbk/ENSAMC-PROJECTS/tree/main/GraphApp)
+Both sites are static HTML and are served from this repo with GitHub Pages:
+[Nova](https://h0ussamcl4p.github.io/ENSAMC-PROJECTS/web/nova/) ·
+[Aeronautics club](https://h0ussamcl4p.github.io/ENSAMC-PROJECTS/web/aeronautics-club/)
 
-### **Project 3**: Bithday Script 
-A python script to wish happy birthday to your friends and family using cmd.  
+## Licence
 
-[🔗 See the project details](https://github.com/HoussamCbk/ENSAMC-PROJECTS/tree/main/BirthdayScript)
+MIT, see [LICENSE](LICENSE).
