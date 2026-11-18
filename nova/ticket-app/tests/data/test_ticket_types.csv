@@ -1,0 +1,4 @@
+name,email,phone,ticket_type
+Test Ensamien,test.ensamien@example.com,5551111111,ensamien
+Test Adherent,test.adherent@example.com,5552222222,adherent
+Test Externe,test.externe@example.com,5553333333,externe

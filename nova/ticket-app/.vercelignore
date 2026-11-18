@@ -1,0 +1,44 @@
+# Exclude unused and large files from Vercel deployment
+# Add patterns below to prevent deployment of unnecessary files
+
+
+# Only include required ticket templates
+ticket_templates/*
+!ticket_templates/exclusive.pdf
+!ticket_templates/etudiant.pdf
+!ticket_templates/adherent.pdf
+!ticket_templates/organisateur-ade.pdf
+!ticket_templates/externe.pdf
+
+# Exclude ticket template placeholders and guides
+ticket_templates/PLACEHOLDER_*.txt
+ticket_templates/INSTRUCTIONS.txt
+ticket_templates/README.md
+ticket_templates/GUIDE.md
+
+docs/
+tests/
+static/guest_list_template.csv
+static/404.html
+
+# Exclude scripts and migration files
+scripts/
+performance_test.py
+migrate_ensamien_to_etudiant.py
+clear_tickets.py
+verify_ticket_types.py
+
+# Exclude local environment and config files
+.env*
+*.md
+*.csv
+
+# Exclude Docker and GitHub workflow files
+Dockerfile
+.github/
+
+# Exclude other unused assets
+nova-ticket-app.json
+tmp_tickets/
+tickets/
+.venv/

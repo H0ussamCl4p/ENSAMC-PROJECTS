@@ -1,0 +1,5 @@
+first_name,last_name,email,phone,school,cin,ticket_type,carrier
+John,Doe,john@example.com,0612345678,ENSAM Casablanca,AB123456,ensamien,
+Jane,Smith,jane@example.com,0698765432,Université Hassan II,CD789012,externe,
+Ali,Benali,ali.benali@example.com,0670011223,ENSA Fès,EE998877,adherent,
+Sara,El Amrani,sara.elamrani@example.com,0655544332,EMI Rabat,,organisateur-ade,

@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+
+{% block title %}Send Message{% endblock %}
+
+{% block content %}
+<div class="mb-6 xl:mb-8">
+    <h1 class="text-2xl md:text-3xl font-bold text-slate-900">Send Custom Messages</h1>
+    <p class="text-slate-500 mt-1 text-sm md:text-base xl:text-lg">Send announcements to all guests or specific groups</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 xl:gap-8">
+    <!-- Message Form -->
+    <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-6 xl:p-8">
+        <h3 class="font-semibold text-slate-900 mb-4 xl:mb-6 flex items-center gap-2 text-sm md:text-base xl:text-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Compose Message
+        </h3>
+        
+        <form method="POST" class="space-y-4 xl:space-y-6">
+            <div>
+                <label for="recipients" class="block text-sm font-medium text-slate-700 mb-2">
+                    Send To
+                </label>
+                <select id="recipients" 
+                        name="recipients" 
+                        required
+                        class="w-full px-4 xl:px-5 py-2 xl:py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option value="all">All Guests ({{ stats.total }})</option>
+                    <option value="active">Pending Tickets Only ({{ stats.active }})</option>
+                    <option value="used">Checked-In Guests Only ({{ stats.checked_in }})</option>
+                    <option value="voided">Voided Tickets Only ({{ stats.voided }})</option>
+                </select>
+            </div>
+            
+            <div>
+                <label for="message_type" class="block text-sm font-medium text-slate-700 mb-2">
+                    Message Type
+                </label>
+                <select id="message_type" 
+                        name="message_type" 
+                        required
+                        class="w-full px-4 xl:px-5 py-2 xl:py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option value="email">📧 Email</option>
+                </select>
+            </div>
+            
+            <div id="email_subject_field">
+                <label for="subject" class="block text-sm font-medium text-slate-700 mb-2">
+                    Email Subject
+                </label>
+                <input type="text" 
+                       id="subject" 
+                       name="subject" 
+                       placeholder="Event Update: Important Information"
+                       class="w-full px-4 xl:px-5 py-2 xl:py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            </div>
+            
+            <div>
+                <label for="message" class="block text-sm font-medium text-slate-700 mb-2">
+                    Message
+                </label>
+                <textarea id="message" 
+                          name="message" 
+                          rows="8" 
+                          required
+                          placeholder="Enter your message here..."
+                          class="w-full px-4 xl:px-5 py-2 xl:py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+                <p class="mt-2 text-sm xl:text-base text-slate-500">
+                    Use <code class="bg-slate-100 px-1 rounded">{name}</code> for guest name, <code class="bg-slate-100 px-1 rounded">{email}</code> for email
+                </p>
+            </div>
+            
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 xl:p-4">
+                <p class="text-sm xl:text-base text-blue-800">
+                    <strong>Preview:</strong> Messages will be personalized for each recipient automatically.
+                </p>
+            </div>
+            
+            <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-6 xl:px-7 py-3 xl:py-3.5 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 shadow-sm transition-colors text-sm md:text-base xl:text-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                Send Message
+            </button>
+        </form>
+    </div>
+    
+    <!-- Message Templates & Tips -->
+    <div class="space-y-4 xl:space-y-6">
+        <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-6 xl:p-8">
+            <h3 class="font-semibold text-slate-900 mb-4 xl:mb-6 flex items-center gap-2 text-sm md:text-base xl:text-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Message Templates
+            </h3>
+            
+            <div class="space-y-3 xl:space-y-4">
+                <div class="border border-slate-200 rounded-lg p-3 xl:p-4 hover:bg-slate-50 cursor-pointer" onclick="fillTemplate('reminder')">
+                    <h4 class="font-medium text-slate-800 text-sm xl:text-base mb-1">Event Reminder</h4>
+                    <p class="text-xs xl:text-sm text-slate-600">Remind guests about the upcoming event</p>
+                </div>
+                
+                <div class="border border-slate-200 rounded-lg p-3 xl:p-4 hover:bg-slate-50 cursor-pointer" onclick="fillTemplate('update')">
+                    <h4 class="font-medium text-slate-800 text-sm xl:text-base mb-1">Important Update</h4>
+                    <p class="text-xs xl:text-sm text-slate-600">Notify about venue, time, or other changes</p>
+                </div>
+                
+                <div class="border border-slate-200 rounded-lg p-3 xl:p-4 hover:bg-slate-50 cursor-pointer" onclick="fillTemplate('thankyou')">
+                    <h4 class="font-medium text-slate-800 text-sm xl:text-base mb-1">Thank You</h4>
+                    <p class="text-xs xl:text-sm text-slate-600">Post-event thank you message</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-6 xl:p-8">
+            <h3 class="font-semibold text-slate-900 mb-4 xl:mb-6 flex items-center gap-2 text-sm md:text-base xl:text-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                Message Statistics
+            </h3>
+            
+            <div class="space-y-2 xl:space-y-3 text-sm xl:text-base">
+                <div class="flex justify-between">
+                    <span class="text-slate-600">Total Guests:</span>
+                    <span class="font-medium text-slate-900">{{ stats.total }}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-600">Pending:</span>
+                    <span class="font-medium text-amber-700">{{ stats.active }}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-600">Checked In:</span>
+                    <span class="font-medium text-green-700">{{ stats.checked_in }}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-600">Voided:</span>
+                    <span class="font-medium text-red-700">{{ stats.voided }}</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 xl:p-5">
+            <h4 class="font-medium text-amber-900 mb-2">📝 Tips</h4>
+            <ul class="space-y-1 text-sm xl:text-base text-amber-800">
+                <li>• Personalize with <code>{name}</code> placeholder</li>
+                <li>• Test with yourself first by sending to "Voided"</li>
+                <li>• Email delivery may take a few minutes</li>
+            </ul>
+        </div>
+        
+        <div class="bg-green-50 border border-green-200 rounded-lg p-4 xl:p-5">
+            <h4 class="font-medium text-green-900 mb-2">✅ Best Practices</h4>
+            <ul class="space-y-1 text-sm xl:text-base text-green-800">
+                <li>• Clear subject lines for emails</li>
+                <li>• Include event name and date</li>
+                <li>• Add contact info for questions</li>
+                <li>• Send during business hours</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Toggle email subject field based on message type
+    document.getElementById('message_type').addEventListener('change', function() {
+        const subjectField = document.getElementById('email_subject_field');
+        if (this.value === 'email') {
+            subjectField.style.display = 'block';
+            document.getElementById('subject').required = true;
+        } else {
+            subjectField.style.display = 'none';
+            document.getElementById('subject').required = false;
+        }
+    });
+    
+    // Message templates
+    const templates = {
+        reminder: {
+            subject: 'Reminder: Upcoming Event - Soirée Night',
+            message: 'Hi {name},\n\nThis is a friendly reminder about our upcoming event:\n\n📅 Event: Soirée Night\n🕐 Time: [Event Time]\n📍 Location: [Event Location]\n\nPlease bring your ticket (sent earlier) for quick check-in.\n\nLooking forward to seeing you there!\n\nBest regards,\nEvent Team'
+        },
+        update: {
+            subject: 'Important Update: Event Information',
+            message: 'Hi {name},\n\nWe have an important update regarding the event:\n\n[Your update details here]\n\nIf you have any questions, please don\'t hesitate to contact us.\n\nThank you for your understanding!\n\nBest regards,\nEvent Team'
+        },
+        thankyou: {
+            subject: 'Thank You for Attending!',
+            message: 'Hi {name},\n\nThank you so much for joining us at Soirée Night! We hope you had a wonderful time.\n\nWe\'d love to hear your feedback and see you at our next event.\n\nStay tuned for more exciting events coming soon!\n\nWarm regards,\nEvent Team'
+        }
+    };
+    
+    function fillTemplate(type) {
+        const template = templates[type];
+        document.getElementById('subject').value = template.subject;
+        document.getElementById('message').value = template.message;
+        document.getElementById('message_type').value = 'email';
+        document.getElementById('email_subject_field').style.display = 'block';
+    }
+</script>
+{% endblock %}

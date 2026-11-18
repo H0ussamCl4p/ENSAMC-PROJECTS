@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}Bulk Cancel Tickets{% endblock %}
+
+{% block content %}
+<div class="mb-6 xl:mb-8">
+    <h1 class="text-2xl md:text-3xl font-bold text-slate-900">Bulk Ticket Cancellation</h1>
+    <p class="text-slate-500 mt-1 text-sm md:text-base xl:text-lg">Cancel multiple tickets at once based on filters</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 xl:gap-8">
+    <!-- Cancellation Form -->
+    <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-6 xl:p-8">
+        <h3 class="font-semibold text-slate-900 mb-4 xl:mb-6 flex items-center gap-2 text-sm md:text-base xl:text-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+            Cancel Tickets
+        </h3>
+        
+        <form method="POST" class="space-y-4 xl:space-y-6" onsubmit="return confirm('Are you sure you want to cancel these tickets? This action cannot be undone.');">
+            <div>
+                <label for="filter" class="block text-sm font-medium text-slate-700 mb-2">
+                    Select Tickets to Cancel
+                </label>
+                <select id="filter" 
+                        name="filter" 
+                        required
+                        class="w-full px-4 xl:px-5 py-2 xl:py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option value="">Choose a filter...</option>
+                    <option value="pending">All Pending Tickets ({{ stats.active }})</option>
+                    <option value="used">All Used Tickets ({{ stats.checked_in }})</option>
+                    <option value="all">All Active/Used Tickets ({{ stats.active + stats.checked_in }})</option>
+                </select>
+            </div>
+            
+            <div>
+                <label for="reason" class="block text-sm font-medium text-slate-700 mb-2">
+                    Cancellation Reason
+                </label>
+                <select id="reason" 
+                        name="reason" 
+                        required
+                        class="w-full px-4 xl:px-5 py-2 xl:py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option value="Event cancelled">Event cancelled</option>
+                    <option value="Event postponed">Event postponed</option>
+                    <option value="Venue changed">Venue changed</option>
+                    <option value="Administrative cancellation">Administrative cancellation</option>
+                    <option value="Duplicate cleanup">Duplicate cleanup</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            
+            <div class="bg-red-50 border border-red-200 rounded-lg p-4 xl:p-5">
+                <p class="text-sm xl:text-base text-red-800">
+                    <strong>⚠️ Warning:</strong> This action will permanently void the selected tickets and cannot be undone.
+                </p>
+            </div>
+            
+            <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-6 xl:px-7 py-3 xl:py-3.5 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 shadow-sm transition-colors text-sm md:text-base xl:text-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                Cancel Selected Tickets
+            </button>
+        </form>
+    </div>
+    
+    <!-- Current Statistics -->
+    <div class="space-y-4 xl:space-y-6">
+        <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-6 xl:p-8">
+            <h3 class="font-semibold text-slate-900 mb-4 xl:mb-6 flex items-center gap-2 text-sm md:text-base xl:text-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="8" rx="1"/><rect x="14" y="6" width="3" height="12" rx="1"/></svg>
+                Current Statistics
+            </h3>
+            
+            <div class="space-y-3 xl:space-y-4">
+                <div class="flex items-center justify-between p-3 xl:p-4 bg-slate-50 rounded-lg">
+                    <span class="text-slate-700">Total Guests</span>
+                    <span class="font-bold text-slate-900">{{ stats.total }}</span>
+                </div>
+                
+                <div class="flex items-center justify-between p-3 xl:p-4 bg-amber-50 rounded-lg">
+                    <span class="text-amber-700">Pending Tickets</span>
+                    <span class="font-bold text-amber-900">{{ stats.active }}</span>
+                </div>
+                
+                <div class="flex items-center justify-between p-3 xl:p-4 bg-green-50 rounded-lg">
+                    <span class="text-green-700">Checked In</span>
+                    <span class="font-bold text-green-900">{{ stats.checked_in }}</span>
+                </div>
+                
+                <div class="flex items-center justify-between p-3 xl:p-4 bg-red-50 rounded-lg">
+                    <span class="text-red-700">Already Voided</span>
+                    <span class="font-bold text-red-900">{{ stats.voided }}</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 xl:p-5">
+            <h4 class="font-medium text-blue-900 mb-2">💡 Use Cases</h4>
+            <ul class="space-y-2 text-sm xl:text-base text-blue-800">
+                <li>• <strong>Event Cancelled:</strong> Cancel all pending tickets</li>
+                <li>• <strong>Duplicate Cleanup:</strong> Void test or duplicate entries</li>
+                <li>• <strong>Capacity Change:</strong> Cancel excess reservations</li>
+                <li>• <strong>Administrative:</strong> Batch processing for corrections</li>
+            </ul>
+        </div>
+        
+        <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 xl:p-5">
+            <h4 class="font-medium text-amber-900 mb-2">📋 Best Practices</h4>
+            <ul class="space-y-2 text-sm xl:text-base text-amber-800">
+                <li>• Always provide a clear cancellation reason</li>
+                <li>• Consider notifying guests via "Send Message" feature</li>
+                <li>• Export guest list before bulk operations</li>
+                <li>• Voided tickets remain in system for audit trail</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

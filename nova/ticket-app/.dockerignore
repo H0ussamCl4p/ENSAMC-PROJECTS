@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+*.egg-info/
+
+# Node
+node_modules/
+static/css/output.css
+
+# Tickets and local data
+tickets/
+valid_tokens.csv
+.secret_key
+*.log
+
+# Git & editor
+.git/
+.gitignore
+.vscode/
+
+# Tests and docs (not needed in runtime image)
+tests/
+docs/

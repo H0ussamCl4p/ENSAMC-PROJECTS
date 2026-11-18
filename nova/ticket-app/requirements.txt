@@ -1,0 +1,7 @@
+qrcode[pil]
+fpdf2
+flask
+python-dotenv
+pypdf
+waitress
+firebase-admin

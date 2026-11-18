@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Tickets and data
+tickets/*.pdf
+valid_tokens.csv
+.secret_key
+users.json
+guest_list.csv
+tmp_tickets/
+
+# Node modules and build
+node_modules/
+# Note: output.css is committed for Vercel deployment
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env files (do not commit secrets)
+.env
+.env.local
+.vercel
+
+# Firebase credentials
+service-account.json
+*-firebase-adminsdk-*.json

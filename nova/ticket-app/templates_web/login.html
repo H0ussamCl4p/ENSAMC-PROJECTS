@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ADE NOVA Dashboard</title>
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+    <link href="{{ url_for('static', filename='css/output.css') }}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        body {
+            background: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .glass-effect {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+        }
+        .input-focus:focus {
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="w-full max-w-sm mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Logo/Header -->
+        <div class="mb-5 sm:mb-6">
+            <div class="text-center rounded-xl border border-slate-200 bg-slate-50 shadow-sm px-4 py-3 sm:px-5 sm:py-4">
+                <h1 class="text-lg sm:text-xl font-semibold text-slate-900 tracking-tight">ADE NOVA</h1>
+                <p class="text-xs sm:text-sm text-slate-600 mt-0.5">Système de gestion de tickets</p>
+            </div>
+        </div>
+
+        <!-- Login Card -->
+        <div class="glass-effect rounded-xl sm:rounded-2xl shadow-sm p-5 sm:p-6">
+            <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4 sm:mb-5 text-center">Connexion</h2>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="mb-3 sm:mb-4 p-2.5 sm:p-3 rounded-lg {% if category == 'error' %}bg-red-50 text-red-700 border border-red-200{% else %}bg-emerald-50 text-emerald-700 border border-emerald-200{% endif %}">
+                            <div class="flex items-start gap-2">
+                                {% if category == 'error' %}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="sm:w-5 sm:h-5 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="15" x2="9" y1="9" y2="15"/>
+                                    <line x1="9" x2="15" y1="9" y2="15"/>
+                                </svg>
+                                {% else %}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="sm:w-5 sm:h-5 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <path d="m9 11 3 3L22 4"/>
+                                </svg>
+                                {% endif %}
+                                <span class="text-xs sm:text-sm font-medium flex-1">{{ message }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST" action="{{ url_for('login') }}" class="space-y-5 sm:space-y-6">
+                <!-- Email -->
+                <div>
+                    <label for="email" class="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
+                        Adresse Email
+                    </label>
+                    <div class="flex items-center gap-3">
+                        <span class="inline-flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </span>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            required
+                            autocomplete="username"
+                            class="input-focus w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-300 focus:border-indigo-300 transition-all bg-gray-50 focus:bg-white placeholder-gray-400"
+                            placeholder="votre.email@example.com"
+                            autofocus
+                        >
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <label for="password" class="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
+                        Mot de passe
+                    </label>
+                    <div class="flex items-center gap-3">
+                        <span class="inline-flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                        </span>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            required
+                            autocomplete="current-password"
+                            class="input-focus w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-300 focus:border-indigo-300 transition-all bg-gray-50 focus:bg-white placeholder-gray-400"
+                            placeholder="••••••••"
+                        >
+                    </div>
+                </div>
+
+                <!-- Remember Me -->
+                <div class="flex items-center justify-center pt-2">
+                    <label class="inline-flex items-center cursor-pointer group">
+                        <input type="checkbox" name="remember" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 cursor-pointer">
+                        <span class="ml-2 text-xs sm:text-sm text-gray-600 group-hover:text-gray-900 transition-colors">Se souvenir de moi</span>
+                    </label>
+                </div>
+
+                <!-- Submit Button -->
+                <button 
+                    type="submit"
+                    class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 sm:py-3 px-4 rounded-lg border border-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400/60 transition-colors shadow-md hover:shadow-lg text-sm"
+                    style="background-color:#4f46e5;"
+                >
+                    <span class="flex items-center justify-center gap-2">
+                        <span>Se connecter</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" class="sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14"/>
+                            <path d="m12 5 7 7-7 7"/>
+                        </svg>
+                    </span>
+                </button>
+            </form>
+
+            <!-- 2FA Notice -->
+            <div class="mt-4 sm:mt-5 p-3 bg-slate-50 border border-slate-200 rounded-lg">
+                <div class="flex items-start gap-2">
+                    <div class="flex-shrink-0 w-7 h-7 bg-slate-100 rounded-md flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" class="text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <path d="m9 12 2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-xs font-medium text-slate-900">Authentification 2FA activée</p>
+                        <p class="text-xs text-slate-700 mt-0.5 leading-relaxed">Un code de vérification sera envoyé par email après la connexion</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-6 sm:mt-8 space-y-2">
+            <p class="text-xs sm:text-sm text-gray-600 font-light">&copy; 2025 ADE NOVA ENSAM Casablanca</p>
+            <p class="text-xs text-gray-500">Tous droits réservés</p>
+        </div>
+    </div>
+
+    <script>
+        // Add subtle animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const card = document.querySelector('.glass-effect');
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
