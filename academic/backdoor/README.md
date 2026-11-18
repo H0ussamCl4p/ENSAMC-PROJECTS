@@ -1,43 +1,18 @@
-# Backdoor Project : BYOE — AV Evasion & Post-Exploitation
+# Backdoor project: AV evasion and post-exploitation
 
-<p align="center"> <strong>Made with ❤️ by CHOUBIK Houssam</strong></p>
+> **Warning:** for educational use only, in isolated lab environments. Do not use it on systems you are not authorised to test.
 
+## Project Overview
 
----
+Security course lab at ENSAM Casablanca. A proof of concept of a BYOE (Bring-Your-Own-Environment) chain: payload generation, integration into a Python in-memory loader, observation of artifacts, and recommended defensive rules. The goal is to understand the technique well enough to detect it.
 
-> **Warning:** For *educational use only* in isolated lab environments. Unauthorized use is prohibited.
+## Repository Structure
 
----
+* `malware.py`: demonstrative Python loader (PoC). **Educational only.**
+* `gen_shellcode.sh`: helper Bash script to generate a Python-formatted payload.
+* `msfconsole.txt`: example Metasploit handler template for lab use.
 
-## Table of Contents
-
-1. Project Overview
-2. Repository Structure
-3. File Descriptions
-4. High-level Usage
-5. Findings
-6. Detection & Mitigation
-7. Lab Best Practices
-8. Limitations & Ethics
-9. Contact
-
----
-
-## 1. Project Overview
-
-A concise, lab-focused proof-of-concept demonstrating a BYOE (Bring-Your-Own-Environment) chain: payload generation, integration into a Python in-memory loader, observation of artifacts, and recommended defensive rules. Intended for defenders and researchers to understand and detect such techniques.
-
----
-
-## 2. Repository Structure
-
-* `malware.py` — demonstrative Python loader (PoC). **Educational only.**
-* `gen_shellcode.sh` — helper Bash script to generate a Python-formatted payload.
-* `msfconsole.txt` — example Metasploit handler template for lab use.
-
----
-
-## 3. File Descriptions
+## File Descriptions
 
 ### `gen_shellcode.sh`
 
@@ -54,9 +29,7 @@ A concise, lab-focused proof-of-concept demonstrating a BYOE (Bring-Your-Own-Env
 **Purpose:** PoC loader showing how an interpreter can allocate executable memory, write a byte blob, and invoke it.
 **Notes:** Uses `ctypes` to call Windows APIs. **Do not run outside an isolated VM.**
 
----
-
-## 4. High-level Usage
+## High-level Usage
 
 1. Prepare an isolated lab (VMs, isolated network).
 2. Generate payload with `gen_shellcode.sh` (external tools required).
@@ -64,16 +37,12 @@ A concise, lab-focused proof-of-concept demonstrating a BYOE (Bring-Your-Own-Env
 4. Start monitoring (EDR, Sysmon, packet capture) and a listener in the lab.
 5. Run PoC only to collect artifacts and tune detections.
 
----
-
-## 5. Findings
+## Findings
 
 * **In-memory execution** may evade static checks but produces behavioral artifacts: RWX allocations, memory writes, thread creation/execution, and outbound C2 connections.
-* **Privilege escalation** is not guaranteed—UAC and up-to-date patches can block attempts.
+* **Privilege escalation** is not guaranteed, UAC and up-to-date patches can block attempts.
 
----
-
-## 6. Detection & Mitigation (prioritized)
+## Detection & Mitigation (prioritized)
 
 **High priority**
 
@@ -89,20 +58,14 @@ A concise, lab-focused proof-of-concept demonstrating a BYOE (Bring-Your-Own-Env
 * Implement allow-listing (WDAC), egress filtering, DNS/IP reputation checks.
 * Enable Sysmon with API call logging and automatic memory capture for suspicious processes.
 
----
-
-## 7. Lab Best Practices
+## Lab Best Practices
 
 * Operate in isolated VMs with dedicated networking.
 * Use snapshots and restore between tests.
 * Log all actions and obtain written authorization.
 * Destroy and sanitize artifacts after testing.
 
----
-
-## 8. Limitations & Ethics
+## Limitations & Ethics
 
 Results are lab-specific: EDR vendor, OS version, patch level, and network configuration strongly affect detectability.
-This project exists to improve defensive capability—not to facilitate malicious activity.
-
----
+This project exists to improve defensive capability, not to help attackers malicious activity.

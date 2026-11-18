@@ -1,6 +1,23 @@
 # ENSAMC Projects
 
-Projects I built as a student at ENSAM Casablanca, from first-year electronics to club websites.
+Projects I built as a student at ENSAM Casablanca: course projects, electronics, small tools, and the apps I made for the students' association with Nova.
+
+## Course projects
+
+| Project | What it is | Stack |
+|---|---|---|
+| [GPS tracker](academic/gps-tracker) | Vehicle tracker sending its position over GSM to Firebase, with a live map (Automotive Technology) | ESP8266, SIM800A, Firebase, JavaScript |
+| [SIRD app](academic/sird-covid) | Covid-19 in Indonesia with the SIRD model: interpolation, integration, ODEs (Numerical Analysis) | Python |
+| [Backdoor](academic/backdoor) | Lab proof of concept of an in-memory payload loader, with detection rules (Security) | Python, Metasploit |
+
+## Nova and the students' association
+
+| Project | What it is | Stack |
+|---|---|---|
+| [Ticket app](nova/ticket-app) | QR-code tickets and door check-in for a 2025 party | Flask, Firestore |
+| [RC-Maps](nova/rc-maps) | 3D map of the clubs fair and a live vote for the best club | React, Three.js, Express |
+| [EDTECH](nova/edtech) | Website for an educational technology event | SvelteKit |
+| [Nova site](nova/site) | Link page for the Nova list | HTML, CSS |
 
 ## Electronics
 
@@ -17,16 +34,15 @@ Projects I built as a student at ENSAM Casablanca, from first-year electronics t
 | [Graph app](software/graph-app) | Plot X/Y data with a linear regression line and save it as PNG | Python, Tkinter, matplotlib |
 | [Birthday script](software/birthday-script) | Blinking "Happy Birthday" banner in the terminal | Python, pyfiglet |
 
-## Websites
+## Clubs
 
 | Project | What it is |
 |---|---|
-| [Nova](web/nova) | Link page for the Nova student list |
-| [Arts & Crafts Aeronautics](web/aeronautics-club) | Link page for the ENSAM Casablanca aeronautics club |
+| [Arts & Crafts Aeronautics](clubs/aeronautics) | Link page for the ENSAM Casablanca aeronautics club |
 
-Both sites are static HTML and are served from this repo with GitHub Pages:
-[Nova](https://h0ussamcl4p.github.io/ENSAMC-PROJECTS/web/nova/) ·
-[Aeronautics club](https://h0ussamcl4p.github.io/ENSAMC-PROJECTS/web/aeronautics-club/)
+The static sites are served from this repo with GitHub Pages:
+[Nova](https://h0ussamcl4p.github.io/ENSAMC-PROJECTS/nova/site/) ·
+[Aeronautics club](https://h0ussamcl4p.github.io/ENSAMC-PROJECTS/clubs/aeronautics/)
 
 ## Licence
 
