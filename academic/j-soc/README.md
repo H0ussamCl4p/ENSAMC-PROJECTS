@@ -1,4 +1,4 @@
-# J-SOC — Java Security Operations Center
+# J-SOC : Java Security Operations Center
 
 Application console de gestion d'incidents de sécurité, développée dans le cadre du module de **Programmation Orientée Objet en Java**.
 
@@ -28,13 +28,13 @@ java -cp out jsoc.Main
 
 ## Stack
 
-Java 17+ — aucune dépendance externe — persistance CSV.
+Java 17 ou plus, sans dépendance externe, persistance en CSV.
 
 ## Documentation
 
-Le diagramme de classes complet est disponible dans `docs/UML.puml`.
-
----
+- Rapport : [docs/CSCC_Rapport_J-SOC_POO_Java_UML.pdf](docs/CSCC_Rapport_J-SOC_POO_Java_UML.pdf)
+- Diagrammes UML (PDF et projet Enterprise Architect) : [docs/uml_diagrams](docs/uml_diagrams)
+- Captures d'écran : [docs/screenshots](docs/screenshots)
 
 ## Réalisé par
 

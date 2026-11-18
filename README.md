@@ -8,6 +8,7 @@ Projects I built as a student at ENSAM Casablanca: course projects, electronics,
 |---|---|---|
 | [GPS tracker](academic/gps-tracker) | Vehicle tracker sending its position over GSM to Firebase, with a live map (Automotive Technology) | ESP8266, SIM800A, Firebase, JavaScript |
 | [SIRD app](academic/sird-covid) | Covid-19 in Indonesia with the SIRD model: interpolation, integration, ODEs (Numerical Analysis) | Python |
+| [J-SOC](academic/j-soc) | Console app to track security incidents through their life cycle, team project (Object-Oriented Programming) | Java, UML |
 | [Backdoor](academic/backdoor) | Lab proof of concept of an in-memory payload loader, with detection rules (Security) | Python, Metasploit |
 
 ## Nova and the students' association
@@ -39,6 +40,7 @@ Projects I built as a student at ENSAM Casablanca: course projects, electronics,
 | Project | What it is |
 |---|---|
 | [Arts & Crafts Aeronautics](clubs/aeronautics) | Link page for the ENSAM Casablanca aeronautics club |
+| [Aeronautics training](clubs/aeronautics/training) | Slides, drawings and CAD files from the club's 2024 training sessions |
 
 The static sites are served from this repo with GitHub Pages:
 [Nova](https://h0ussamcl4p.github.io/ENSAMC-PROJECTS/nova/site/) ·
