@@ -9,6 +9,7 @@ Projects I built as a student at ENSAM Casablanca: course projects, electronics,
 | [GPS tracker](academic/gps-tracker) | Vehicle tracker sending its position over GSM to Firebase, with a live map (Automotive Technology) | ESP8266, SIM800A, Firebase, JavaScript |
 | [SIRD app](academic/sird-covid) | Covid-19 in Indonesia with the SIRD model: interpolation, integration, ODEs (Numerical Analysis) | Python |
 | [J-SOC](academic/j-soc) | Console app to track security incidents through their life cycle, team project (Object-Oriented Programming) | Java, UML |
+| [Secure routing](academic/secure-routing) | Safest and fastest route in a network graph, Dijkstra vs A* (Operations Research) | Python, NetworkX |
 | [Backdoor](academic/backdoor) | Lab proof of concept of an in-memory payload loader, with detection rules (Security) | Python, Metasploit |
 
 ## Nova and the students' association
